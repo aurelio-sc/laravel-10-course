@@ -13,4 +13,14 @@ class SupportController extends Controller
         $supports = $support->all();        
         return view('admin/supports/index', compact('supports')); // compact('supports) == ['supports' => $supports] / returns data to the supports view
     }
+
+    public function create()
+    {
+        return view('admin/supports/create');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }
