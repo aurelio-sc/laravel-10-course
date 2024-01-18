@@ -1,7 +1,7 @@
 <h1>New Doubt</h1>
 
 <form action="{{ route('supports.store') }}" method="POST">
-    @csrf
+    @csrf()
     <input type="text" placeholder="Subject" name="subject">
     <textarea name="body" cols="30" rows="5" placeholder="Description"></textarea>
     <button type="submit">Send</button>
