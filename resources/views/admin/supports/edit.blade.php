@@ -1,4 +1,12 @@
 <h1>Edit Doubt {{ $support->id }}</h1>
+{{-- $errors is an automaticaly inject variable in all views --}}
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
 
 <form action="{{ route('supports.update', $support->id) }}" method="POST">
     @csrf()

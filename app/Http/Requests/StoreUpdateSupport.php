@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUpdateSupport extends FormRequest
 {
@@ -22,7 +23,7 @@ class StoreUpdateSupport extends FormRequest
     public function rules(): array
     {
         //the rules can be a string with a pipe separator or an array, as shown bellow:
-        return [
+        $rules = [
             'subject' => 'required|min:3|max:255|unique:supports',
             'body' => [
                 'required',
@@ -30,5 +31,19 @@ class StoreUpdateSupport extends FormRequest
                 'max:10000'
             ]
         ];
+
+        if ($this->method() == 'PUT') {
+            //'unique:supports,subject,{$this->id},id' : unique within the subject column in the supports table, except if {$this->id} == id. Watch out for spaces, they're now allowed after each comma.
+            //the same id being done with Rule::unique('supports')->ignore($this->id).
+            $rules['subject'] = [
+                'required',
+                'min:3',
+                'max:255',
+                //"unique:supports,subject,{$this->id},id"
+                Rule::unique('supports')->ignore($this->id)
+            ];
+        }
+
+        return $rules;
     }
 }

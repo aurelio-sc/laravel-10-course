@@ -34,7 +34,7 @@ class SupportController extends Controller
 
     public function store(StoreUpdateSupport $request, Support $support)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['status'] = 'a';
 
         $support = $support->create($data);
@@ -50,7 +50,7 @@ class SupportController extends Controller
         return view('admin/supports/edit', compact('support'));
     }
 
-    public function update(Request $request, Support $support, string|int $id)
+    public function update(StoreUpdateSupport $request, Support $support, string|int $id)
     {
         if (!$support = $support->find($id)){
             return back();
@@ -59,12 +59,15 @@ class SupportController extends Controller
         // The code bellow can be replaced by the following update() method:
         // $support->subject = $request->subject;
         // $support->body = $request->body;
-        // $support->save();
+        // $support->save(); 
 
-        $support->update($request->only([
-            'subject',
-            'body'
-        ]));
+        // Also works:
+        // $support->update($request->only([
+        //     'subject',
+        //     'body'
+        // ]));
+
+        $support->update($request->validated());
 
         return redirect()->route('supports.index');
     }
