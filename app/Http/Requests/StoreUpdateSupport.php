@@ -32,15 +32,15 @@ class StoreUpdateSupport extends FormRequest
             ]
         ];
 
-        if ($this->method() == 'PUT') {
+        if ($this->method() == 'PUT' || $this->method() == 'PATCH') {     
             //'unique:supports,subject,{$this->id},id' : unique within the subject column in the supports table, except if {$this->id} == id. Watch out for spaces, they're now allowed after each comma.
             //the same id being done with Rule::unique('supports')->ignore($this->id).
-            $rules['subject'] = [
-                'required',
+            $rules['subject'] = [                
+                'required', //'nullable',
                 'min:3',
                 'max:255',
                 //"unique:supports,subject,{$this->id},id"
-                Rule::unique('supports')->ignore($this->id)
+                Rule::unique('supports')->ignore($this->support ?? $this->id)
             ];
         }
 
