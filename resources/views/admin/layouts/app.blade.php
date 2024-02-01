@@ -8,14 +8,15 @@
     <title>@yield('title') - {{ config('app.name') }}</title>
 </head>
 <body>
-    <head>
-        @yield('header')
-    </head>
-    <div class="content">
-        @yield('content')
-    </div>
-    <footer>
+    <section class="container px-4 mx-auto">
+        
+         @yield('header')
+        <div class="content">
+            @yield('content')
+        </div>
+        <footer>
 
-    </footer>
+        </footer>
+    </section>
 </body>
 </html>

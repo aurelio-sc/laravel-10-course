@@ -3,7 +3,9 @@
 @section('title', 'Supports')
 
 @section('header')
-<h1>Supports List</h1>
+    @include('admin/supports/partials/header', [
+        'total' => $supports->total()
+    ])
 @endsection
 
 
