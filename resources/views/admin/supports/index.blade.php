@@ -1,4 +1,13 @@
+@extends('admin/layouts/app')
+
+@section('title', 'Supports')
+
+@section('header')
 <h1>Supports List</h1>
+@endsection
+
+
+@section('content')
 
 <a href="{{ route('supports.create') }}">Add new doubt</a>
 
@@ -26,5 +35,6 @@
 
 <x-pagination 
     :paginator="$supports" 
-    :appends="$filters"
-    />
+    :appends="$filters"/>
+
+@endsection
