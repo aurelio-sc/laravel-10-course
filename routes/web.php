@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::resource('/supports', SupportController::class);
+
 Route::get('/contato', [SiteController::class, 'contact']);
 
 Route::get('/supports', [SupportController::class, 'index'])->name('supports.index');
